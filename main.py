@@ -1,5 +1,6 @@
 from os import environ, getcwd
-from os.path import basename
+from os.path import basename,isfile
+from urllib.parse import unquote
 from PyQt5.QtWidgets import QApplication, QMainWindow,QFileDialog
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap,QCursor
@@ -42,6 +43,26 @@ class PixelTool(QMainWindow,Ui_MainWindow):
         self.afterimg.setScaledContents(True)
         self.imgpath=""
         self.imgout=None
+        self.setAcceptDrops(True)
+        if len(sys.argv) > 1:
+            if isfile(sys.argv[1]):
+                self.imgpath=sys.argv[1]
+                self.setSliderValue()
+                self.rawimg.setPixmap(QPixmap(self.imgpath))
+    def dragEnterEvent(self, event) -> None:
+        if event.mimeData().hasText():
+            self.myLog.infolog(event.mimeData().text())
+            if "file:///" in event.mimeData().text():
+                if isfile(unquote(event.mimeData().text().replace("file:///",""))):
+                    try:
+                        Image.open(unquote(event.mimeData().text().replace("file:///","")))
+                    except Exception as e:
+                        self.myLog.errorlog(str(e))
+                        return
+                    self.imgpath=unquote(event.mimeData().text().replace("file:///",""))
+                    self.setSliderValue()
+                    self.rawimg.setPixmap(QPixmap(self.imgpath))
+                    event.accept()
     def logvaule(self):
         self.myLog.infolog("滑块目前值为%s" % self.controlvar.value())
     def reseizes1ze(self):
@@ -115,13 +136,16 @@ class PixelTool(QMainWindow,Ui_MainWindow):
         self.myLog.infolog("块大小为%s" % self.controlvar.value())
         Thread(target=self.UpdateImg).start()
     def chose_dir(self):
-        if self.imgpath == "":
-            return
-        targetpath=QFileDialog.getExistingDirectory(self,"选择输出文件夹",getcwd())
-        if self.imgout == None:
-            return
-        self.myLog.infolog("导出为%s" % targetpath+"/Pixel "+basename(self.imgpath))
-        self.imgout.save(targetpath+"/Pixel "+basename(self.imgpath))
+        try:
+            if self.imgpath == "":
+                return
+            targetpath=QFileDialog.getExistingDirectory(self,"选择输出文件夹",getcwd())
+            if self.imgout == None:
+                return
+            self.myLog.infolog("导出为%s" % targetpath+"/Pixel "+basename(self.imgpath))
+            self.imgout.save(targetpath+"/Pixel "+basename(self.imgpath))
+        except Exception as e:
+            self.myLog.errorlog(str(e))
     def chose_img(self):
         imgpath=QFileDialog.getOpenFileName(self,"选择图片",getcwd())[0]
         if imgpath == "":
@@ -144,7 +168,7 @@ class PixelTool(QMainWindow,Ui_MainWindow):
         if self.imgpath == "":
             return
         block_size=self.controlvar.value()
-        img = Image.open(self.imgpath).convert('RGBA')
+        img = Image.open(self.imgpath).convert('RGB')
         width, height = img.size
         img_array = img.load()
         max_width = width + block_size
