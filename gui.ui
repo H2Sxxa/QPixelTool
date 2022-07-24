@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>694</width>
+    <height>319</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="4" rowspan="5">
+     <widget class="QLabel" name="afterimg">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1" rowspan="6">
+     <widget class="QSlider" name="controlvar">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="3" rowspan="5">
+     <widget class="QLabel" name="rawimg">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="5" rowspan="2" colspan="2">
+     <widget class="QTextBrowser" name="LogBrowser"/>
+    </item>
+    <item row="3" column="5" colspan="2">
+     <widget class="QPushButton" name="InputBtn">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>导入</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="5" colspan="2">
+     <widget class="QPushButton" name="Outbtn">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>导出</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="5" colspan="2">
+     <widget class="QPushButton" name="RefreshBtn">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>刷新</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>694</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>菜单</string>
+    </property>
+    <addaction name="MenuAbout"/>
+    <addaction name="separator"/>
+    <addaction name="MenuSeize"/>
+    <addaction name="MenuInput"/>
+    <addaction name="MenuOut"/>
+    <addaction name="Menuwtlog"/>
+    <addaction name="separator"/>
+    <addaction name="MenuFullscreen"/>
+    <addaction name="MenudonotFull"/>
+    <addaction name="MenuClose"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>主题</string>
+    </property>
+    <addaction name="MenuSwichDL"/>
+    <addaction name="MenuSwichTE"/>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menu_2"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="MenuAbout">
+   <property name="text">
+    <string>关于</string>
+   </property>
+  </action>
+  <action name="MenuInput">
+   <property name="text">
+    <string>导入</string>
+   </property>
+  </action>
+  <action name="MenuSwichDL">
+   <property name="text">
+    <string>切换深浅</string>
+   </property>
+  </action>
+  <action name="MenuSwichTE">
+   <property name="text">
+    <string>选择主题</string>
+   </property>
+  </action>
+  <action name="MenuClose">
+   <property name="text">
+    <string>关闭</string>
+   </property>
+  </action>
+  <action name="MenuOut">
+   <property name="text">
+    <string>导出</string>
+   </property>
+  </action>
+  <action name="MenuSeize">
+   <property name="text">
+    <string>缩放</string>
+   </property>
+  </action>
+  <action name="MenuFullscreen">
+   <property name="text">
+    <string>全屏</string>
+   </property>
+  </action>
+  <action name="MenudonotFull">
+   <property name="text">
+    <string>退出全屏</string>
+   </property>
+  </action>
+  <action name="Menuwtlog">
+   <property name="text">
+    <string>导出日志</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
